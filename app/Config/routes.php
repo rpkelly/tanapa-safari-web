@@ -42,7 +42,7 @@
  */
 
 	Router::mapResources('safari');
-	Router::parseExtenstions('json');
+	Router::parseExtensions('json');
 
 	require CAKE . 'Config' . DS . 'routes.php';
 
