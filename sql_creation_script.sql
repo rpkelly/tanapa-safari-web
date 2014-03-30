@@ -1,19 +1,29 @@
-DROP TABLE safari_points_of_interest;
-DROP TABLE safari_waypoints;
-DROP TABLE report;
-DROP TABLE report_type;
-DROP TABLE user_log;
-DROP TABLE user;
-DROP TABLE safari;
-DROP TABLE media;
+DROP TABLE IF EXISTS SAFARI_POINTS_OF_INTEREST;
+DROP TABLE IF EXISTS SAFARI_WAYPOINTS;
+DROP TABLE IF EXISTS REPORT;
+DROP TABLE IF EXISTS REPORT_TYPE;
+DROP TABLE IF EXISTS USER_LOG;
+DROP TABLE IF EXISTS USER;
+DROP TABLE IF EXISTS SAFARI;
+DROP TABLE IF EXISTS MEDIA;
 
-CREATE TABLE user
+DROP TABLE IF EXISTS safari_points_of_interest;
+DROP TABLE IF EXISTS safari_waypoints;
+DROP TABLE IF EXISTS report;
+DROP TABLE IF EXISTS report_type;
+DROP TABLE IF EXISTS user_log;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS safari;
+DROP TABLE IF EXISTS media;
+
+
+CREATE TABLE USER
 (
 	id				INTEGER(20) NOT NULL auto_increment,
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE user_log
+CREATE TABLE USER_LOG
 (
 	id				INTEGER(30) NOT NULL auto_increment,
 	user_id			INTEGER(20) NOT NULL,
@@ -21,10 +31,10 @@ CREATE TABLE user_log
 	longitude		DECIMAL(9,6) NOT NULL,
 	time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(id),
-	Foreign Key (user_id) references user(id)
+	Foreign Key (user_id) references USER(id)
 );
 
-CREATE TABLE media
+CREATE TABLE MEDIA
 (
 	id				INTEGER(30) NOT NULL auto_increment,
 	type			VARCHAR(20) NOT NULL,
@@ -32,14 +42,14 @@ CREATE TABLE media
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE report_type
+CREATE TABLE REPORT_TYPE
 (
 	id				INTEGER(20) NOT NULL auto_increment,
 	name			VARCHAR(80) NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE report
+CREATE TABLE REPORT
 (
 	id				INTEGER(20) NOT NULL auto_increment,
 	report_type_id	INTEGER(20) NOT NULL,
@@ -50,12 +60,12 @@ CREATE TABLE report
 	user_id			INTEGER(20) NOT NULL,
 	report_media_id	INTEGER(30),
 	PRIMARY KEY(id),
-	Foreign Key(report_type_id) references report_type(id),
-	Foreign Key(user_id) references user(id),
-	Foreign Key(report_media_id) references media(id)
+	Foreign Key(report_type_id) references REPORT_TYPE(id),
+	Foreign Key(user_id) references USER(id),
+	Foreign Key(report_media_id) references MEDIA(id)
 );
 
-CREATE TABLE safari
+CREATE TABLE SAFARI
 (
 	id				INTEGER(11) NOT NULL auto_increment,
 	name			VARCHAR(80) NOT NULL,
@@ -64,11 +74,12 @@ CREATE TABLE safari
 	footer_media_id	INTEGER(30),
 	tile_media_id	INTEGER(30),
 	PRIMARY KEY (id),
-	Foreign Key (header_media_id) references media(id),
-	Foreign Key (footer_media_id) references media(id)
+	Foreign Key (header_media_id) references MEDIA(id),
+	Foreign Key (footer_media_id) references MEDIA(id),
+	Foreign Key (tile_media_id) references MEDIA(id)
 );
 
-CREATE TABLE safari_waypoints
+CREATE TABLE SAFARI_WAYPOINTS
 (
 	id				INTEGER(15) NOT NULL auto_increment,
 	sequence		INTEGER(15) NOT NULL,
@@ -76,10 +87,10 @@ CREATE TABLE safari_waypoints
 	longitude		DECIMAL(9,6) NOT NULL,
 	safari_id		INTEGER(11) NOT NULL,
 	PRIMARY KEY (id),
-	Foreign Key (safari_id) references safari(id)
+	Foreign Key (safari_id) references SAFARI(id)
 );
 
-CREATE TABLE safari_points_of_interest
+CREATE TABLE SAFARI_POINTS_OF_INTEREST
 (
 	id				INTEGER(20) NOT NULL auto_increment,
 	name			VARCHAR(80) NOT NULL,
@@ -88,5 +99,5 @@ CREATE TABLE safari_points_of_interest
 	longitude		DECIMAL(9,6) NOT NULL,
 	radius			INTEGER(11) NOT NULL,
 	PRIMARY KEY (id),
-	Foreign Key(safari_id) references safari(id)
+	Foreign Key(safari_id) references SAFARI(id)
 );
