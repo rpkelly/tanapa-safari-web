@@ -54,6 +54,13 @@ class Safari extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'TileMedia' => array(
+            'className' => 'Media',
+            'foreignKey' => 'tile_media_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
 }
