@@ -1,3 +1,12 @@
+DROP TABLE safari_points_of_interest;
+DROP TABLE safari_waypoints;
+DROP TABLE report;
+DROP TABLE report_type;
+DROP TABLE user_log;
+DROP TABLE user;
+DROP TABLE safari;
+DROP TABLE media;
+
 CREATE TABLE user
 (
 	id				INTEGER(20) NOT NULL auto_increment,
@@ -53,6 +62,7 @@ CREATE TABLE safari
 	description		TEXT,
 	header_media_id	INTEGER(30),
 	footer_media_id	INTEGER(30),
+	tile_media_id	INTEGER(30),
 	PRIMARY KEY (id),
 	Foreign Key (header_media_id) references media(id),
 	Foreign Key (footer_media_id) references media(id)
