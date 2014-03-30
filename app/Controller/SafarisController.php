@@ -21,6 +21,7 @@ class SafarisController extends AppController {
  * @return void
  */
 	public function index() {
+        $this->layout = 'ajax';
 		$this->set('safaris', $this->paginate());
 		$this->set('_serialize', array('safaris'));
 	}
