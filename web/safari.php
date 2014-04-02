@@ -30,20 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $stmt->bind_param('s', $_GET['id']);
         $stmt->execute();
         $stmt->bind_result($safari_id, $safari_name, $safari_description, $header_media_id, $header_media_type, $header_media_url, $footer_media_id, $footer_media_type, $footer_media_url, $tile_media_id, $tile_media_type, $tile_media_url);
-        $stmt->fetch();
-        $result = array(
-            "id" => $safari_id,
-            "name" => $safari_name,
-            "description" => $safari_description,
-            "header_media_id" => $header_media_id,
-            "header_media_type" => $header_media_type,
-            "header_media_url" => $header_media_url,
-            "footer_media_id" => $footer_media_id,
-            "footer_media_type" => $footer_media_type,
-            "footer_media_url" => $footer_media_url,
-            "tile_media_id" => $tile_media_id,
-            "tile_media_type" => $tile_media_type,
-            "tile_media_url" => $tile_media_url
+        $result = array();
+        if ($stmt->fetch()){
+            $result["id"] = $safari_id;
+            $result["name"] = $safari_name;
+            $result["description"] = $safari_description;
+            $result["header_media_id"] = $header_media_id;
+            $result["header_media_type"] = $header_media_type;
+            $result["header_media_url"] = $header_media_url;
+            $result["footer_media_id"] = $footer_media_id;
+            $result["footer_media_type"] = $footer_media_type;
+            $result["footer_media_url"] = $footer_media_url;
+            $result["tile_media_id"] = $tile_media_id;
+            $result["tile_media_type"] = $tile_media_type;
+            $result["tile_media_url"] = $tile_media_url;
         );
 
         $stmt->close();
