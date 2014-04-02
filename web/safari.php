@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $result["tile_media_id"] = $tile_media_id;
             $result["tile_media_type"] = $tile_media_type;
             $result["tile_media_url"] = $tile_media_url;
-        );
+        };
 
         $stmt->close();
         echo json_encode($result);
