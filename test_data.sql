@@ -12,6 +12,9 @@ DELETE FROM SAFARI;
 DELETE FROM MEDIA;
 
 
+INSERT INTO REPORT_TYPE(name) VALUES('Poaching');
+INSERt INTO REPORT_TYPE(name) VALUES('Animal Movement');
+
 
 INSERT INTO MEDIA(type, url) VALUES ('image/jpeg', '/media/arusha_safari_header.jpg');
 SET @arusha_safari_header_media_id = LAST_INSERT_ID();
