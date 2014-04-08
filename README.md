@@ -11,20 +11,19 @@ TANAPA Safari Web App
 git clone https://github.com/<YOURGITHUBUSERNAME>/tanapa-safari-web
 ```
 
-* Copy the php files over to your `public_html` directory and set the correct permissions:
+* Copy the php files over to your `public_html` directory:
 ```
 cp -R -f web/* ~/public_html/
-chmod 755 -R ~/public_html
 ```
 
-* Create your config folder and config file that will hold the db setup:
+* Create your config folder and config file that will hold the db setup and set the correct permissions:
 ```
 mkdir ~/public_html/config
 touch ~/public_html/config/config.php
-chmod 
+chmod 755 -R ~/public_html
 ```
 
-* Edit ~/public_html/config/config.php with your favorite editor and put in this data:
+* Edit `~/public_html/config/config.php` with your favorite editor and put in this data:
 ```
 <?php
 
