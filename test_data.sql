@@ -57,3 +57,5 @@ INSERT INTO SAFARI_WAYPOINTS(sequence, latitude, longitude, safari_id)
 	VALUES ('6', '34.674897', '-82.842004', @arusha_safari);
 INSERT INTO SAFARI_WAYPOINTS(sequence, latitude, longitude, safari_id) 
 	VALUES ('7', '34.681990', '-82.841707', @arusha_safari);
+INSERT INTO SAFARI_POINTS_OF_INTEREST(name, safari_id, latitude, longitude, radius) 
+	VALUES ('McAdams Hall', @arusha_safari, '34.675937', '-82.834018', '50');
