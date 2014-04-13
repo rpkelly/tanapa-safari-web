@@ -25,10 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         }
         $stmt->close();
 
-        $stmt = $db_conn->prepare("SELECT id, name, latitude, longitude, radius FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_ID = ?");
+        $stmt = $db_conn->prepare("SELECT id, name, latitude, longitude, radius, safari_id FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_ID = ?");
         $stmt->bind_param('i', $_GET['id']);
         $stmt->execute();
-        $stmt->bind_result($poi_id, $name, $latitude, $longitude, $radius);
+        $stmt->bind_result($poi_id, $name, $latitude, $longitude, $radius, $safari_id);
         while ($stmt->fetch()) {
             $results["results"]["points_of_interest"][] = array(
                 "id" => $poi_id,
@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 "latitude" => $latitude,
                 "longitude" => $longitude,
                 "radius" => $radius,
+                "safari_id" => $safari_id
             );
         }
         $stmt->close();
