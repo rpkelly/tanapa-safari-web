@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_path = "media/" . uniqid() . "." . $extension;
     $media_url = "/" . $new_path;
     move_uploaded_file($_FILES["file"]["tmp_name"], $new_path);
+    chmod($new_path, "0777");
 
     // insert into database.
     $stmt = $db_conn->prepare("INSERT INTO MEDIA (type, url) VALUES(?, ?)");
