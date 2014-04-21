@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $report_data->latitude,
         $report_data->longitude,
         $report_data->user_id,
-        $report_data->media->id);
+        isset($report_data->media) ? $report_data->media->id : null);
     $stmt->execute();
     $report_id = $db_conn->insert_id;
     $stmt->close();
