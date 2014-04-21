@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $report_data = json_decode(file_get_contents("php://input"));
     $report_media_id = isset($report_data->media) ? $report_data->media->id : null;
     $stmt = $db_conn->prepare("INSERT INTO REPORT (report_type_id, content, time, latitude, longitude, user_id, report_media_id) VALUES(?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param('issddi', 
+    $stmt->bind_param('issddii', 
         $report_data->report_type_id, 
         $report_data->content,
         $report_data->time,
