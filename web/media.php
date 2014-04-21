@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /* Close the streams */
     fclose($fp);
     fclose($file_uploaded);
+    chmod($new_path, 0755);
     
     /*
     $temp = explode(".", $_FILES["file"]["name"]);
