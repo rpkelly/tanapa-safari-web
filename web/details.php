@@ -51,8 +51,16 @@ else if(isset($_POST['poi_delete']))
 <html>
 	<head>
 		<title>TANAPA Safari Admin Panel</title>
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<style type="text/css">
+			#map-canvas{ height: 400px }
+		</style>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiJYDrTbqabJ4a0T2mtzQwfpCOJwX443M&sensor=false">
+		</script>
 	</head>
 	<body>
 		<div class="row-fluid">
@@ -156,100 +164,172 @@ else if(isset($_POST['poi_delete']))
 						<?php
 							}
 						?>
-						<h2>WayPoints</h2>
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Sequence</th>
-									<th>Latitude</th>
-									<th>Longitude</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-									$stmt = $db_conn->prepare("SELECT SAFARI_WAYPOINTS.id, SAFARI_WAYPOINTS.sequence, SAFARI_WAYPOINTS.latitude, SAFARI_WAYPOINTS.longitude FROM SAFARI_WAYPOINTS WHERE SAFARI_WAYPOINTS.safari_id = ?");
-									$stmt->bind_param('i', $safari);
-									$stmt->execute();
-									$stmt->bind_result($w_id, $w_sequence, $w_lat, $w_lng);
-									while($stmt->fetch()){	?>
-										<tr>
-											<td>
-												<?php echo $w_id;?>
-											</td>
-											<td>
-												<?php echo $w_sequence; ?>
-											</td>
-											<td>
-												<?php echo $w_lat; ?>
-											</td>
-											<td>
-												<?php echo $w_lng; ?>
-											</td>
-											<td>
-												<form name="" method="POST" action="">
-												<input type="hidden" name="ID" value="<?php echo $w_id;?>">
-												<input type="submit" name="w_delete" value="Delete" class="btn btn-danger">
-												</form>
-											</td>
-										</tr>
-									<?php
-									}
-									$stmt->close();
-									?>
-								</tbody>
-							</table>
-							<a href='newwp.php' class='btn btn-success'> Add WayPoint </a>
-						<h2>Points of Interest</h2>
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Latitude</th>
-									<th>Longitude</th>
-									<th>Radius</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-									$stmt = $db_conn->prepare("SELECT SAFARI_POINTS_OF_INTEREST.id, SAFARI_POINTS_OF_INTEREST.name, SAFARI_POINTS_OF_INTEREST.latitude, SAFARI_POINTS_OF_INTEREST.longitude, SAFARI_POINTS_OF_INTEREST.radius FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_POINTS_OF_INTEREST.safari_id = ?");
-									$stmt->bind_param('i', $safari);
-									$stmt->execute();
-									$stmt->bind_result($poi_id, $poi_name, $poi_lat, $poi_lng, $poi_radius);
-									while($stmt->fetch()){	?>
-										<tr>
-											<td>
-												<?php echo $poi_id;?>
-											</td>
-											<td>
-												<?php echo $poi_name; ?>
-											</td>
-											<td>
-												<?php echo $poi_lat; ?>
-											</td>
-											<td>
-												<?php echo $poi_lng; ?>
-											</td>
-											<td>
-												<?php echo $poi_radius; ?>
-											</td>
-											<td>
-												<form name="" method="POST" action="">
-												<input type="hidden" name="ID" value="<?php echo $poi_id;?>">
-												<input type="submit" name="poi_delete" value="Delete" class="btn btn-danger">
-												</form>
-											</td>
-										</tr>
-									<?php
-									}
-									$stmt->close();
-									?>
-								</tbody>
-							</table>
-							<a href='newpoi.php' class='btn btn-success'>Add Point of Interest</a>
-				</div>
-			</div>
+
+						<div class="accordion" id="wp-acc">
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="btn btn-large btn-block btn-inverse" data-toggle="collapse" data-parent="#wp-acc" href="#collapseOne">
+										WayPoints
+									</a>
+								</div>
+								<div id="collapseOne" class="accordion-body collapse">
+									<div class="accordion-inner">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Sequence</th>
+													<th>Latitude</th>
+													<th>Longitude</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+													$stmt = $db_conn->prepare("SELECT SAFARI_WAYPOINTS.id, SAFARI_WAYPOINTS.sequence, SAFARI_WAYPOINTS.latitude, SAFARI_WAYPOINTS.longitude FROM SAFARI_WAYPOINTS WHERE SAFARI_WAYPOINTS.safari_id = ?");
+													$stmt->bind_param('i', $safari);
+													$stmt->execute();
+													$stmt->bind_result($w_id, $w_sequence, $w_lat, $w_lng);
+													while($stmt->fetch()){	?>
+														<tr>
+															<td>
+																<?php echo $w_id;?>
+															</td>
+															<td>
+																<?php echo $w_sequence; ?>
+															</td>
+															<td>
+																<?php echo $w_lat; 
+																		$wp_lat[] = $w_lat;?>
+															</td>
+															<td>
+																<?php echo $w_lng; 
+																		$wp_lng[] = $w_lng;?>
+															</td>
+															<td>
+																<form name="" method="POST" action="">
+																<input type="hidden" name="ID" value="<?php echo $w_id;?>">
+																<input type="submit" name="w_delete" value="Delete" class="btn btn-danger">
+																</form>
+															</td>
+														</tr>
+												<?php
+													}
+													$stmt->close();
+													?>
+												</tbody>
+											</table>
+											<a href='newwp.php' class='btn btn-success'> Add WayPoint </a>
+										</div>
+									</div>
+								</div>
+							</div>	
+						<div class="accordion" id="poi-acc">
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="btn btn-large btn-block btn-inverse" data-toggle="collapse" data-parent="#poi-acc" href="#collapseTwo">
+										Points of Interest
+									</a>
+								</div>
+								<div id="collapseTwo" class="accordion-body collapse">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Latitude</th>
+												<th>Longitude</th>
+												<th>Radius</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+												$stmt = $db_conn->prepare("SELECT SAFARI_POINTS_OF_INTEREST.id, SAFARI_POINTS_OF_INTEREST.name, SAFARI_POINTS_OF_INTEREST.latitude, SAFARI_POINTS_OF_INTEREST.longitude, SAFARI_POINTS_OF_INTEREST.radius FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_POINTS_OF_INTEREST.safari_id = ?");
+												$stmt->bind_param('i', $safari);
+												$stmt->execute();
+												$stmt->bind_result($poi_id, $poi_name, $poi_lat, $poi_lng, $poi_radius);
+												while($stmt->fetch()){	?>
+													<tr>
+														<td>
+															<?php echo $poi_id;?>
+														</td>
+														<td>
+															<?php echo $poi_name; 
+																	$p_names[] = $poi_name;?>
+														</td>
+														<td>
+															<?php echo $poi_lat; 
+																	$p_lat[] = $poi_lat;?>
+														</td>
+														<td>
+															<?php echo $poi_lng; 
+																	$p_lng[] = $poi_lng;?>
+														</td>
+														<td>
+															<?php echo $poi_radius; ?>
+														</td>
+														<td>
+															<form name="" method="POST" action="">
+															<input type="hidden" name="ID" value="<?php echo $poi_id;?>">
+															<input type="submit" name="poi_delete" value="Delete" class="btn btn-danger">
+															</form>
+														</td>
+													</tr>
+												<?php
+												}
+												$stmt->close();
+												?>
+											</tbody>
+										</table>
+										<a href='newpoi.php' class='btn btn-success'>Add Point of Interest</a>
+									</div>
+								</div>
+							</div>
+						</div>
+<script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(<?php echo $wp_lat[0] . ',' . $wp_lng[0];?>),
+          zoom: 13
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+		var safariWayPoints = [
+			<?php
+				for($i = 0; $i < count($wp_lat); $i++){
+					if($i > 0){
+						echo  ',';
+					}
+					echo 'new google.maps.LatLng(' .$wp_lat[$i] . ',' . $wp_lng[$i] .')';
+				}
+			?>
+		];
+		var safariPath = new google.maps.Polyline({
+							path: safariWayPoints,
+						    geodesic: true,
+						    strokeColor: '#FF0000',
+						    strokeOpacity: 1.0,
+						    strokeWeight: 2
+		 });
+		safariPath.setMap(map);
+
+		<?php
+			for($i = 0; $i < count($p_lat); $i++){
+		?>
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(<?php echo $p_lat[$i] . ',' . $p_lng[$i];?>),
+					title: "<?php echo $p_names[$i];?>"
+				});
+
+				marker.setMap(map);
+		<?php
+			}
+		?>
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+						<div id="map-canvas"></div>
+					</div>
 				</div>
 			</div>
 		</div>
