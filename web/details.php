@@ -296,11 +296,13 @@ else if(isset($_POST['poi_delete']))
 
 		var safariWayPoints = [
 			<?php
+				if(isset($wp_lat)){
 				for($i = 0; $i < count($wp_lat); $i++){
 					if($i > 0){
 						echo  ',';
 					}
 					echo 'new google.maps.LatLng(' .$wp_lat[$i] . ',' . $wp_lng[$i] .')';
+				}
 				}
 			?>
 		];
@@ -314,6 +316,7 @@ else if(isset($_POST['poi_delete']))
 		safariPath.setMap(map);
 
 		<?php
+			if(isset($p_lat)){
 			for($i = 0; $i < count($p_lat); $i++){
 		?>
 				var marker = new google.maps.Marker({
@@ -323,6 +326,7 @@ else if(isset($_POST['poi_delete']))
 
 				marker.setMap(map);
 		<?php
+			}
 			}
 		?>
       }
