@@ -94,8 +94,8 @@ CREATE TABLE SAFARI_POINTS_OF_INTEREST
 (
 	id				INTEGER(20) NOT NULL auto_increment,
 	name			VARCHAR(80) NOT NULL,
-	description		VARCHAR(255) NOT NULL,
-	safari_id		INTEGER(255) NOT NULL,
+	media_id        INTEGER(20) NOT NULL, 
+    safari_id		INTEGER(255) NOT NULL,
 	latitude		DECIMAL(8,6) NOT NULL,
 	longitude		DECIMAL(9,6) NOT NULL,
 	radius			INTEGER(11) NOT NULL,
