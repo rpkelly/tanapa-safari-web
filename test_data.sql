@@ -116,10 +116,31 @@ INSERT INTO MEDIA(type, url) VALUES ('image/jpeg', '/media/poi_pool.jpg');
 SET @avana_pool_media_id = LAST_INSERT_ID();
 
 INSERT INTO SAFARI_POINTS_OF_INTEREST(name, media_id, safari_id, latitude, longitude, radius)
-    VALUES("Dog Park", @avana_dogpark_media_id, @avana_safari_id, "34.81953", "-82.308396", 50);
+    VALUES("Dog Park", @avana_dogpark_media_id, @avana_safari_id, "34.81953", "-82.308396", 100);
 INSERT INTO SAFARI_POINTS_OF_INTEREST(name, media_id, safari_id, latitude, longitude, radius)
-    VALUES("Car Care Center", @avana_carcare_media_id, @avana_safari_id, "34.818406", "-82.308873", 50);
+    VALUES("Car Care Center", @avana_carcare_media_id, @avana_safari_id, "34.818406", "-82.308873", 100);
 INSERT INTO SAFARI_POINTS_OF_INTEREST(name, media_id, safari_id, latitude, longitude, radius)
-    VALUES("Pool", @avana_pool_media_id, @avana_safari_id, "34.819437", "-82.309763", 50);
+    VALUES("Pool", @avana_pool_media_id, @avana_safari_id, "34.819437", "-82.309763", 100);
 
+
+
+INSERT INTO MEDIA(type, url) VALUES ('image/jpeg', '/media/clemson_safari_tile.jpg');
+SET @clemson_safari_tile_media_id = LAST_INSERT_ID();
+
+INSERT INTO SAFARI(name, description, header_media_id, footer_media_id, tile_media_id)
+VALUES('Clemson Safari', 'Tour Clemson.', null, null, @clemson_safari_tile_media_id);
+
+
+INSERT INTO MEDIA(type, url) VALUES ('image/jpeg', '/media/greenville_safari_tile.jpg');
+SET @greenville_safari_tile_media_id = LAST_INSERT_ID();
+
+INSERT INTO SAFARI(name, description, header_media_id, footer_media_id, tile_media_id)
+VALUES('Greenville Safari', 'Tour Greenville.', null, null, @greenville_safari_tile_media_id);
+
+
+INSERT INTO MEDIA(type, url) VALUES ('image/jpeg', '/media/greenville_zoo_safari_tile.jpg');
+SET @greenville_zoo_safari_tile_media_id = LAST_INSERT_ID();
+
+INSERT INTO SAFARI(name, description, header_media_id, footer_media_id, tile_media_id)
+VALUES('Greenville Zoo Safari', 'Tour Greenville Zoo.', null, null, @greenville_zoo_safari_tile_media_id);
 
