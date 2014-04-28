@@ -63,14 +63,9 @@ else if(isset($_POST['poi_delete']))
 		</script>
 	</head>
 	<body>
-		<div class="row-fluid">
-			<div class="navbar navbar-inverse navbar-fixed-top">
-				<div class="navbar-inner">
-				<a class="brand" href="index.php">Safaris</a>
-				<ul class="nav nav-tabs">
-				</ul>
-			</div>
-		</div>
+		<?php
+			include 'navbar.php';
+		?>
 		<div class="row-fluid">
 			<div class="offset1 span10" id="backer">
 				<div id="inner">

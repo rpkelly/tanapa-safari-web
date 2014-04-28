@@ -25,18 +25,15 @@ if(isset($_POST['delete']))
 <html>
 	<head>
 		<title>TANAPA Safari Admin Panel</title>
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div class="row-fluid">
-			<div class="navbar navbar-inverse navbar-fixed-top">
-				<div class="navbar-inner">
-				<a class="brand" href="index.php">Safaris</a>
-				<ul class="nav nav-tabs">
-				</ul>
-			</div>
-		</div>
+		<?php
+			include 'navbar.php';
+		?>
 		<div class="row-fluid">
 			<div class="offset1 span10" id="backer">
 				<div id="inner">

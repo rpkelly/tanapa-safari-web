@@ -21,18 +21,15 @@ if(isset($_POST['submit']))
 <html>
 	<head>
 		<title>TANAPA Safari Admin Panel</title>
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div class="row-fluid">
-			<div class="navbar navbar-inverse navbar-fixed-top">
-				<div class="navbar-inner">
-				<a class="brand" href="index.php">Safaris</a>
-				<ul class="nav nav-tabs">
-				</ul>
-			</div>
-		</div>
+		<?php
+			include 'navbar.php';
+		?>
 		<div class="row-fluid">
 			<div class="offset1 span10" id="backer">
 				<div id="inner">
@@ -54,7 +51,7 @@ if(isset($_POST['submit']))
 							<div class="controls">
 								<select name="selectHeader" id="selectHeader">
 								<?php
-									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA");
+									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA LEFT JOIN REPORT ON MEDIA.id = REPORT.report_media_id");
 									$stmt->execute();
 									$stmt->bind_result($media_url, $media_id);
 									while($stmt->fetch()){
@@ -72,7 +69,7 @@ if(isset($_POST['submit']))
 							<div class="controls">
 								<select name="selectFooter" id="selectFooter">
 								<?php
-									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA");
+									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA LEFT JOIN REPORT ON MEDIA.id = REPORT.report_media_id");
 									$stmt->execute();
 									$stmt->bind_result($media_url, $media_id);
 									while($stmt->fetch()){
@@ -90,7 +87,7 @@ if(isset($_POST['submit']))
 							<div class="controls">
 								<select name="selectTile" id="selectTile">
 								<?php
-									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA");
+									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA LEFT JOIN REPORT ON MEDIA.id = REPORT.report_media_id");
 									$stmt->execute();
 									$stmt->bind_result($media_url, $media_id);
 									while($stmt->fetch()){
