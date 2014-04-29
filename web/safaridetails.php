@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             );
         }
         $stmt->close();
-
         $stmt = $db_conn->prepare("SELECT id, name, latitude, longitude, radius, safari_id FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_ID = ?");
         $stmt->bind_param('i', $_GET['id']);
         $stmt->execute();

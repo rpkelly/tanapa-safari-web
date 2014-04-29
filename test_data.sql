@@ -115,4 +115,10 @@ INSERT INTO SAFARI_POINTS_OF_INTEREST(name, safari_id, latitude, longitude, radi
 INSERT INTO SAFARI_POINTS_OF_INTEREST(name, safari_id, latitude, longitude, radius)
     VALUES("Gym", @avana_safari_id, "34.819745", "-82.310579", 50);
 
+INSERT INTO USER VALUES(NULL);
+SET @test_user = LAST_INSERT_ID();
 
+INSERT INTO USER_LOG(user_id, latitude, longitude) VALUES(@test_user, "34.8197", "-82.6543");
+INSERT INTO USER_LOG(user_id, latitude, longitude) VALUES(@test_user, "50.8197", "-72.6543");
+INSERT INTO USER_LOG(user_id, latitude, longitude) VALUES(@test_user, "30.8197", "-85.6543");
+INSERT INTO USER_LOG(user_id, latitude, longitude) VALUES(@test_user, "34.25678", "-82.06543");
