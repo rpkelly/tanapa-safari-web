@@ -64,13 +64,13 @@ if(isset($_POST['delete']))
 									<?php
 										if(strpos($m_type, "image")){
 									?>
-											<img src="<?php echo $m_url;?>">
+											<img src="<?php echo substr($m_url, 1);?>">
 									<?php
 										}
 										if(strpos($m_type, "video")){
 									?>
 											<video width="320" height="240" controls>
-												<source src="<?php echo $m_url;?>" type="<?php echo $m_type;?>">
+												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
 												Your Browser Does Not Support the Video Tag
 											</video>
 									<?php
@@ -78,7 +78,7 @@ if(isset($_POST['delete']))
 										if(strpos($m_type, "audio")){
 									?>
 											<audio controls>
-												<source src="<?php echo $m_url;?>" type="<?php echo $m_type;?>">
+												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
 												Your Browser Does Not Support the Audio Tag
 											</audio>
 									<?php
