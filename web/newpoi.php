@@ -11,8 +11,9 @@ if(isset($_POST['submit']))
 		$p_lat = $_POST['inputLat'];
 		$p_lng = $_POST['inputLng'];
 		$p_rad = $_POST['inputRad'];
-		$stmt = $db_conn->prepare("INSERT INTO SAFARI_POINTS_OF_INTEREST(name, safari_id, latitude, longitude, radius) values(?, ?, ?, ?, ?)");
-		$stmt->bind_param('siddi', $p_name, $p_saf, $p_lat, $p_lng, $p_rad);
+		$p_img = $_POST['selectImage'];
+		$stmt = $db_conn->prepare("INSERT INTO SAFARI_POINTS_OF_INTEREST(name, safari_id, media_id, latitude, longitude, radius) values(?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param('siiddi', $p_name, $p_saf, $p_img, $p_lat, $p_lng, $p_rad);
 		$stmt->execute();
 		$stmt->close();
 		header('Location: index.php');
@@ -38,6 +39,24 @@ if(isset($_POST['submit']))
 							<label class="control-label" for="inputName">Name</label>
 							<div class="controls">
 								<input type="text" name="inputName" id="inputName" placeholder="Point of Interest Name">
+							</div>
+						</div>
+						<div class="controls-group">
+							<label class="control-label" for="selectImage">Image</label>
+							<div class="controls">
+								<select name="selectImage" id="selectImage">
+								<?php
+									$stmt = $db_conn->prepare("SELECT MEDIA.url, MEDIA.id FROM MEDIA LEFT JOIN REPORT ON MEDIA.id = REPORT.report_media_id");
+									$stmt->execute();
+									$stmt->bind_result($media_url, $media_id);
+									while($stmt->fetch()){
+										echo '<option value ="'.$media_id.'" >';
+										echo $media_url;
+										echo '</option>';
+									}
+									$stmt->close();
+								?>
+								</select>
 							</div>
 						</div>
 						<div class="control-group">
