@@ -40,6 +40,9 @@
 							</li>
 						</ul>
 					</li>
+                    <li>
+                        <a href="media_manager.php">Media</a>
+                    </li>f
 				</ul>
 			</div>
 		</div>
