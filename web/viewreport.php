@@ -144,7 +144,6 @@ if(isset($_POST['delete']))
 		?>
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(<?php echo $latitude . ',' . $longitude;?>),
-					title: "<p><?php echo $content;?></p> <a href='reportdetails.php?=<?php $r_id; ?>"
 				});
 
 				marker.setMap(map);
@@ -162,3 +161,6 @@ if(isset($_POST['delete']))
 		</div>
 	</body>
 </html>
+<?php
+	}
+?>

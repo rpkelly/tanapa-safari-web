@@ -115,7 +115,7 @@ if(isset($_POST['delete']))
 		?>
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(<?php echo $latitude . ',' . $longitude;?>),
-					title: "<p><?php echo $content;?></p> <a href='reportdetails.php?=<?php $r_id; ?>"
+					title: "<p><?php echo $content;?></p> <a href='viewreport.php?=<?php $r_id; ?>'>View Report</a>"
 				});
 
 				marker.setMap(map);
