@@ -15,9 +15,9 @@
 		<script>
 			$(document).ready(function(){
 				$("#mediaFileInput").on("change", function(e){
-
-					if (e.source.val()) {
-						//var formData = new FormData($("#poiMediaFileForm")[0]);
+					console
+					if (e.target.val()) {
+						var formData = new FormData(e.target.form);
 						$.ajax({
 							url: 'media.php',  //Server script to process data
 							type: 'POST',
@@ -27,7 +27,7 @@
 								//rowBeingEdited.find("td:nth-child(5)").html("<a href='" + response.url.substring(1) + "'>" + response.url.substring(1) + "</a>");
 							},
 							// Form data
-							data: e.source.form,
+							data: formData,
 							//Options to tell jQuery not to process data or worry about content-type.
 							cache: false,
 							contentType: false,
