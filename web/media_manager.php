@@ -22,9 +22,7 @@
 							url: 'media.php',  //Server script to process data
 							type: 'POST',
 							success: function(data){
-								var response = JSON.parse(data);
-								console.log(response);
-								//rowBeingEdited.find("td:nth-child(5)").html("<a href='" + response.url.substring(1) + "'>" + response.url.substring(1) + "</a>");
+								location.reload();
 							},
 							// Form data
 							data: formData,
