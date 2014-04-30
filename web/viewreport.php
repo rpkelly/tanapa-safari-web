@@ -55,7 +55,6 @@ if(isset($_POST['delete']))
 						$stmt->bind_param('i', $_GET['id']);
 						$stmt->execute();
 						$stmt->bind_result($r_id, $user_id, $latitude, $longitude, $time, $r_content, $m_type, $m_url, $r_type);
-						$m_url = ltrim($m_url, "/");
 						if($stmt->fetch()) {
 					?>		
 							<h2 class="text-center">User <?php echo $user_id;?>: <?php echo $r_type;?></h2><br />
@@ -105,9 +104,13 @@ if(isset($_POST['delete']))
 										</tr>
 										<tr>
 											<td>
-												<form method="get" action="<?php echo substr($m_url, 1);?>">
-													<button type="submit" class="btn">Download Media</button>
-												</form>
+                                                <?php if (!is_null($m_url)) { ?>
+												    <form method="get" action="<?php echo substr($m_url, 1);?>">
+													   <button type="submit" class="btn">Download Media</button>
+												    </form>
+                                                <?php } else { ?>
+                                                    &nbsp;
+                                                <?php } ?>
 											</td>
 										</tr>
 										<tr>
