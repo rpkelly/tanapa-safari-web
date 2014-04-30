@@ -33,6 +33,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>URL</th>
+                                                <th>&nbsp;</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -61,10 +62,12 @@
                                             ?>
                                         <tbody>
                                     </table>
+                                    <form id="mediaFileInputForm">
+                                        <input type="file" id="mediaFileInput">
+                                    </form>
                                 </div>
                             </div>
-                        </div>                      
-
+                        </div>
                     </div>
                 </div>
             </div>
