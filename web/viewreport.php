@@ -51,7 +51,7 @@ if(isset($_POST['delete']))
 			<div class="offset1 span10" id="backer">
 				<div id="inner">
 					<?php
-						$stmt = $db_conn->prepare("SELECT REPORT.id, REPORT.user_id, REPORT.latitude, REPORT.longitude, REPORT.time, REPORT.content, MEDIA.type, MEDIA.url, REPORT_TYPE.name FROM REPORT JOIN MEDIA ON REPORT.report_media_id = MEDIA.id JOIN REPORT_TYPE ON REPORT.report_type_id = REPORT_TYPE.id WHERE REPORT.id = ?");
+						$stmt = $db_conn->prepare("SELECT REPORT.id, REPORT.user_id, REPORT.latitude, REPORT.longitude, REPORT.time, REPORT.content, MEDIA.type, MEDIA.url, REPORT_TYPE.name FROM REPORT LEFT JOIN MEDIA ON REPORT.report_media_id = MEDIA.id JOIN REPORT_TYPE ON REPORT.report_type_id = REPORT_TYPE.id WHERE REPORT.id = ?");
 						$stmt->bind_param('i', $_GET['id']);
 						$stmt->execute();
 						$stmt->bind_result($r_id, $user_id, $latitude, $longitude, $time, $r_content, $m_type, $m_url, $r_type);
