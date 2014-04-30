@@ -58,7 +58,6 @@
 											<tr>
 												<th>ID</th>
 												<th>URL</th>
-												<th>&nbsp;</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -73,12 +72,6 @@
 												<tr>
 													<td><?php echo $media_id?></td>
 													<td><a href="<?php echo substr($media_url, 1); ?>"><?php echo $media_url?></a></td>
-													<form name="" method=POST action="">
-														<input type="hidden" name="ID" value="<?php echo $r_id; ?>">
-														<td>
-															<input type="submit" name="delete" value="Delete" class="btn btn-block btn-danger">
-														</td>
-													</form>
 												</tr>
 											<?php
 												}
