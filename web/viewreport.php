@@ -62,12 +62,12 @@ if(isset($_POST['delete']))
 							<div class="row-fluid">
 								<div class="span5">
 									<?php
-										if(strpos($m_type, "image") == 0){
+										if(strpos($m_type, "image") === 0){
 									?>
 											<img src="<?php echo substr($m_url, 1);?>">
 									<?php
 										}
-										if(strpos($m_type, "video") == 0){
+										if(strpos($m_type, "video") === 0){
 									?>
 											<video width="320" height="240" controls>
 												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
@@ -75,7 +75,7 @@ if(isset($_POST['delete']))
 											</video>
 									<?php
 										}
-										if(strpos($m_type, "audio") == 0){
+										if(strpos($m_type, "audio") === 0){
 									?>
 											<audio controls>
 												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
