@@ -231,6 +231,7 @@ else if(isset($_POST['poi_delete']))
 											<tr>
 												<th>ID</th>
 												<th>Name</th>
+												<th>Image</th>
 												<th>Latitude</th>
 												<th>Longitude</th>
 												<th>Radius</th>
@@ -238,11 +239,12 @@ else if(isset($_POST['poi_delete']))
 										</thead>
 										<tbody>
 											<?php
-												$stmt = $db_conn->prepare("SELECT SAFARI_POINTS_OF_INTEREST.id, SAFARI_POINTS_OF_INTEREST.name, SAFARI_POINTS_OF_INTEREST.latitude, SAFARI_POINTS_OF_INTEREST.longitude, SAFARI_POINTS_OF_INTEREST.radius FROM SAFARI_POINTS_OF_INTEREST WHERE SAFARI_POINTS_OF_INTEREST.safari_id = ?");
+												$stmt = $db_conn->prepare("SELECT SAFARI_POINTS_OF_INTEREST.id, SAFARI_POINTS_OF_INTEREST.name, SAFARI_POINTS_OF_INTEREST.latitude, SAFARI_POINTS_OF_INTEREST.longitude, SAFARI_POINTS_OF_INTEREST.radius, MEDIA.url FROM SAFARI_POINTS_OF_INTEREST LEFT JOIN MEDIA ON SAFARI_POINTS_OF_INTEREST.media_id = MEDIA.id WHERE SAFARI_POINTS_OF_INTEREST.safari_id = ?");
 												$stmt->bind_param('i', $safari);
 												$stmt->execute();
-												$stmt->bind_result($poi_id, $poi_name, $poi_lat, $poi_lng, $poi_radius);
-												while($stmt->fetch()){	?>
+												$stmt->bind_result($poi_id, $poi_name, $poi_lat, $poi_lng, $poi_radius, $m_url);
+												while($stmt->fetch()){	
+													$m_url = ltrim($m_url, "/");?>
 													<tr>
 														<td>
 															<?php echo $poi_id;?>
@@ -250,6 +252,9 @@ else if(isset($_POST['poi_delete']))
 														<td>
 															<?php echo $poi_name; 
 																	$p_names[] = $poi_name;?>
+														</td>
+														<td>
+															<img class='offset3 span6' src="<?php echo $m_url;?>">
 														</td>
 														<td>
 															<?php echo $poi_lat; 

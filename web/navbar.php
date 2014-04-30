@@ -26,8 +26,19 @@
 					<li>
 						<a href="userlocations.php">User Log</a>
 					</li>
-					<li>
-						<a href="userreports.php">Reports</a>
+					<li class="dropdown">
+						<a id="safarisdrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+							Reports
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="safarisdrop">
+							<li>
+								<a href="userreports.php">User Reports</a>
+							</li>
+							<li>
+								<a href="reporttypes.php">Report Types</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>

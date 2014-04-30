@@ -75,10 +75,10 @@ if(isset($_POST['delete']))
 								echo ltrim($tile_media_url, "/");
 								echo '"/>';
 								echo '</td><td>';
-								echo '<a href="details.php?id='.$safari_id.'" class="btn btn-primary">Details</a>';
+								echo '<a href="details.php?id='.$safari_id.'" class="btn btn-block btn-primary">Details</a>';
 								echo '</td><td>';
 								echo '<input type="hidden" name="ID" value="'.$safari_id.'">';
-								echo '<input type="submit" name="delete" value="Delete" class="btn btn-danger">';
+								echo '<input type="submit" name="delete" value="Delete" class="btn btn-block btn-danger">';
 								echo '</td></tr>';
 								echo '</form>';
 							}

@@ -77,7 +77,7 @@ if(isset($_POST['delete']))
 								<td><?php echo $time;?></td>
 								<td><?php echo $latitude;?></td>
 								<td><?php echo $longitude;?></td>
-								<td><a href="viewreport.php?=<?php echo $r_id; ?>">View Report</a></td>
+								<td><a class="btn btn-block btn-primary" href="viewreport.php?id=<?php echo $r_id; ?>">View Report</a></td>
 								<form name="" method=POST action="">
 									<input type="hidden" name="ID" value="<?php echo $r_id; ?>">
 									<td>
@@ -115,7 +115,7 @@ if(isset($_POST['delete']))
 		?>
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(<?php echo $latitude . ',' . $longitude;?>),
-					title: "<p><?php echo $content;?></p> <a href='viewreport.php?=<?php $r_id; ?>'>View Report</a>"
+					title: "<p><?php echo $content;?></p> <a href='viewreport.php?id=<?php $r_id; ?>'>View Report</a>"
 				});
 
 				marker.setMap(map);
