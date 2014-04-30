@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 								
 		<script>
-			$(document).ready() {
+			$(document).ready(function(){
 				$("#mediaFileInput").on("change", function(e){
 
 					if (e.source.val()) {
@@ -35,7 +35,7 @@
 						});   
 					}
 				});
-			}           
+			});           
 		</script>
 
 	</head>
