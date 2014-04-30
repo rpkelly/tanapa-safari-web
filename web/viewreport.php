@@ -161,3 +161,6 @@ if(isset($_POST['delete']))
 		</div>
 	</body>
 </html>
+<?php
+	}
+?>
