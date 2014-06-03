@@ -51,34 +51,33 @@ if(isset($_POST['delete']))
 			<div class="offset1 span10" id="backer">
 				<div id="inner">
 					<?php
-						$stmt = $db_conn->prepare("SELECT REPORT.id, REPORT.user_id, REPORT.latitude, REPORT.longitude, REPORT.time, REPORT.content, MEDIA.type, MEDIA.url, REPORT_TYPE.name FROM REPORT JOIN MEDIA ON REPORT.report_media_id = MEDIA.id JOIN REPORT_TYPE ON REPORT.report_type_id = REPORT_TYPE.id WHERE REPORT.id = ?");
+						$stmt = $db_conn->prepare("SELECT REPORT.id, REPORT.user_id, REPORT.latitude, REPORT.longitude, REPORT.time, REPORT.content, MEDIA.type, MEDIA.url, REPORT_TYPE.name FROM REPORT LEFT JOIN MEDIA ON REPORT.report_media_id = MEDIA.id JOIN REPORT_TYPE ON REPORT.report_type_id = REPORT_TYPE.id WHERE REPORT.id = ?");
 						$stmt->bind_param('i', $_GET['id']);
 						$stmt->execute();
 						$stmt->bind_result($r_id, $user_id, $latitude, $longitude, $time, $r_content, $m_type, $m_url, $r_type);
-						$m_url = ltrim($m_url, "/");
 						if($stmt->fetch()) {
 					?>		
 							<h2 class="text-center">User <?php echo $user_id;?>: <?php echo $r_type;?></h2><br />
 							<div class="row-fluid">
 								<div class="span5">
 									<?php
-										if(strpos($m_type, "image")){
+										if(strpos($m_type, "image") === 0){
 									?>
-											<img src="<?php echo $m_url;?>">
+											<img src="<?php echo substr($m_url, 1);?>">
 									<?php
 										}
-										if(strpos($m_type, "video")){
+										if(strpos($m_type, "video") === 0){
 									?>
 											<video width="320" height="240" controls>
-												<source src="<?php echo $m_url;?>" type="<?php echo $m_type;?>">
+												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
 												Your Browser Does Not Support the Video Tag
 											</video>
 									<?php
 										}
-										if(strpos($m_type, "audio")){
+										if(strpos($m_type, "audio") === 0){
 									?>
 											<audio controls>
-												<source src="<?php echo $m_url;?>" type="<?php echo $m_type;?>">
+												<source src="<?php echo substr($m_url, 1);?>" type="<?php echo $m_type;?>">
 												Your Browser Does Not Support the Audio Tag
 											</audio>
 									<?php
@@ -105,9 +104,13 @@ if(isset($_POST['delete']))
 										</tr>
 										<tr>
 											<td>
-												<form method="get" action="<?php echo $m_url;?>">
-													<button type="submit" class="btn">Download Media</button>
-												</form>
+                                                <?php if (!is_null($m_url)) { ?>
+												    <form method="get" action="<?php echo substr($m_url, 1);?>">
+													   <button type="submit" class="btn">Download Media</button>
+												    </form>
+                                                <?php } else { ?>
+                                                    &nbsp;
+                                                <?php } ?>
 											</td>
 										</tr>
 										<tr>
